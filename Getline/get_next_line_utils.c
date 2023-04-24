@@ -6,7 +6,7 @@
 /*   By: cbouwen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:00:13 by cbouwen           #+#    #+#             */
-/*   Updated: 2023/04/24 18:08:36 by cbouwen          ###   ########.fr       */
+/*   Updated: 2023/04/24 18:34:20 by cbouwen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,6 @@ char	*ft_strjoin(char *buffer, char *static_line)
 	int	j;
 	
 
-	if (!buffer && !static_line)
-		return (NULL);
-	if (!buffer)
-		return (ft_strdup(static_line));
-	if (!static_line)
-		return (ft_strdup(buffer));
-	/*			
 	if (!static_line)
 	{
 		static_line = (char *)malloc(sizeof(char) * 1);
@@ -51,7 +44,6 @@ char	*ft_strjoin(char *buffer, char *static_line)
 			return (NULL);
 		static_line[0] = '\0';
 	}
-	*/
 	new_string = (char *)malloc(sizeof(char) * (ft_strlen(buffer) + ft_strlen(static_line) + 1));
 	i = 0;
 	while (static_line[i])
@@ -66,7 +58,7 @@ char	*ft_strjoin(char *buffer, char *static_line)
 		j++;
 	}
 	new_string[i + j] = '\0';
-	//free(static_line);
+	free(static_line);
 	return (new_string);
 }
 
@@ -79,34 +71,3 @@ size_t	ft_strlen(char *s)
 		i++;
 	return (i);
 }
-
-static int      counter(const char *s)
-{
-        int     i;
-
-        i = 0;
-        while (s[i])
-                i++;
-        return (i);
-}
-
-char    *ft_strdup(const char *s)
-{
-        char    *t;
-        int             len;
-        int             i;
-
-        i = 0;
-        len = counter(s);
-        t = malloc(sizeof(char) * (len + 1));
-        if (!t)
-                return (NULL);
-        while (s[i])
-        {
-                t[i] = s[i];
-                i++;
-        }
-        t[i] = '\0';
-        return (t);
-}
-
