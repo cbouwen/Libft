@@ -6,7 +6,7 @@
 /*   By: cbouwen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 11:59:06 by cbouwen           #+#    #+#             */
-/*   Updated: 2023/04/25 15:22:45 by cbouwen          ###   ########.fr       */
+/*   Updated: 2023/04/26 14:28:57 by cbouwen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,27 +42,25 @@ char	*ft_new_static(char *static_line)
 	size_t	i;
 	size_t	j;
 
+	j = 0;
 	i = 0;
 	while (static_line[i] != '\n' && static_line[i])
 		i++;
 	if (static_line[i] == '\0')
 	{
 		new_static = (char *)malloc(sizeof(char) * 1);
-		if (!new_static)
-			return (NULL);
 		new_static[0] = '\0';
-		free(static_line);
-		return (new_static);
 	}
-	i++;
-	new_static = (char *)malloc(sizeof(char) * (ft_strlen(static_line) - i
-				+ 1));
+	else
+	{
+		new_static = (char *)malloc(sizeof(char) * (ft_strlen(static_line) - ++i
+					+ 1));
+		while (static_line[i])
+			new_static[j++] = static_line[i++];
+		new_static[j] = '\0';
+	}
 	if (!new_static)
 		return (NULL);
-	j = 0;
-	while (static_line[i])
-		new_static[j++] = static_line[i++];
-	new_static[j] = '\0';
 	free(static_line);
 	return (new_static);
 }
@@ -105,10 +103,13 @@ char	*get_next_line(int fd)
 		return (NULL);
 	next_line = ft_find_line(static_line);
 	static_line = ft_new_static(static_line);
-	//free(static_line);
+	if (static_line && *static_line == 0)
+	{
+		free(static_line);
+		static_line = NULL;
+	}
 	return (next_line);
 }
-
 /*int	main(int argc, char **argv)
 {
 	int	fd;
@@ -117,9 +118,13 @@ char	*get_next_line(int fd)
 	if (argc == 2)
 	{
 		fd = open(argv[1], O_RDONLY);
+		for (int i = 0; i<=15; ++i){		
 		next_line = get_next_line(fd);
 		printf("%s", next_line);
-		free(next_line);
+	//	if(next_line)
+	//		free(next_line);
+		}
 		close (fd);
+		
 	}
 }*/

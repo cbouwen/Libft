@@ -6,7 +6,7 @@
 /*   By: cbouwen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:00:13 by cbouwen           #+#    #+#             */
-/*   Updated: 2023/04/25 14:56:03 by cbouwen          ###   ########.fr       */
+/*   Updated: 2023/04/26 14:23:27 by cbouwen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ char	*ft_strjoin(char *buffer, char *static_line)
 	if (!static_line)
 	{
 		static_line = (char *)malloc(sizeof(char) * 1);
-		if (!static_line)
-			return (NULL);
 		static_line[0] = '\0';
 	}
 	if (!static_line || !buffer)
@@ -49,18 +47,12 @@ char	*ft_strjoin(char *buffer, char *static_line)
 				+ ft_strlen(static_line) + 1));
 	if (!new_string)
 		return (NULL);
-	i = 0;
-	while (static_line[i])
-	{
+	i = -1;
+	while (static_line[++i])
 		new_string[i] = static_line[i];
-		i++;
-	}
-	j = 0;
-	while (buffer[j])
-	{
+	j = -1;
+	while (buffer[++j])
 		new_string[i + j] = buffer[j];
-		j++;
-	}
 	new_string[i + j] = '\0';
 	free(static_line);
 	return (new_string);

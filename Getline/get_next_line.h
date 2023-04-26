@@ -6,7 +6,7 @@
 /*   By: cbouwen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:41:26 by cbouwen           #+#    #+#             */
-/*   Updated: 2023/04/25 15:03:08 by cbouwen          ###   ########.fr       */
+/*   Updated: 2023/04/26 14:12:43 by cbouwen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s);
 char	*ft_new_static(char *static_line);
 char	*ft_find_line(char *static_line);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 32
